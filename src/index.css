@@ -1,0 +1,20 @@
+/* stylelint-disable font-family-name-quotes */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --background: #36393f;
+  --foreground: #fff;
+  --primary: #7289da;
+  --secondary: #2f3136;
+  --muted: #72767d;
+}

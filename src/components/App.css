@@ -1,0 +1,49 @@
+.app {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 240px; /* Discord-like sidebar width */
+  flex-shrink: 0;
+  background-color: #2f3136;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-area {
+  flex-grow: 1;
+  background-color: #36393f;
+  display: flex;
+  flex-direction: column;
+}
+
+.disconnected-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #36393f;
+  color: #fff;
+}
+
+.disconnected-screen h2 {
+  margin-bottom: 20px;
+}
+
+.disconnected-screen button {
+  padding: 10px 20px;
+  background-color: #7289da;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.disconnected-screen button:hover {
+  background-color: #677bc4;
+}
