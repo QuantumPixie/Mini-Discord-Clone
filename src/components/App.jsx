@@ -6,6 +6,7 @@ import ChatArea from './Chatarea/ChatArea'
 import './App.css'
 
 const App = () => {
+  console.log('render')
   const [socket, setSocket] = useState(null)
   const [user, setUser] = useState(null)
   const [channels, setChannels] = useState([])
