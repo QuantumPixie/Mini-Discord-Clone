@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { io } from 'socket.io-client'
-import Login from './Login/Login'
-import Sidebar from './Sidebar/Sidebar'
-import ChatArea from './Chatarea/ChatArea'
+import Login from './components/Login/Login'
+import Sidebar from './components/Sidebar/Sidebar'
+import ChatArea from './components/ChatArea/ChatArea'
 import './App.css'
 
 const App = () => {
@@ -12,6 +12,7 @@ const App = () => {
   const [currentChannel, setCurrentChannel] = useState(null)
   const [users, setUsers] = useState([])
   const [messages, setMessages] = useState([])
+  const [isConnected, setIsConnected] = useState(false)
 
   useEffect(() => {
     if (user) {
@@ -20,11 +21,23 @@ const App = () => {
       })
 
       newSocket.on('connect', () => {
-        console.log('Connected to server')
+        setIsConnected(true)
+      })
+
+      newSocket.on('disconnect', () => {
+        setIsConnected(false)
+        setUsers([]) // Clear users when disconnected
+        setChannels([]) // Clear channels when disconnected
+        setCurrentChannel(null) // Reset current channel
+        setMessages([]) // Clear messages when disconnected
+      })
+
+      newSocket.on('connect_error', () => {
+        setIsConnected(false)
+        // Optionally, you can try to reconnect here
       })
 
       newSocket.on('channels', serverChannels => {
-        console.log('Received channels:', serverChannels)
         setChannels(serverChannels)
         if (serverChannels.length > 0) {
           setCurrentChannel(serverChannels[0].name)
@@ -32,12 +45,10 @@ const App = () => {
       })
 
       newSocket.on('users', serverUsers => {
-        console.log('Received users:', serverUsers)
-        setUsers(serverUsers)
+        setUsers(serverUsers.map(user => ({ ...user, connected: user.connected ?? true })))
       })
 
       newSocket.on('message:channel', (channel, message) => {
-        console.log('Received message:', channel, message)
         setMessages(prevMessages => [
           ...prevMessages,
           {
@@ -50,22 +61,30 @@ const App = () => {
         ])
       })
 
-      newSocket.on('user:leave', userData => {
-        console.log('User left:', userData)
-        setUsers(prevUsers => prevUsers.filter(user => user.userId !== userData.userId))
+      newSocket.on('user:join', userData => {
+        setUsers(prevUsers => {
+          const userExists = prevUsers.some(u => u.userId === userData.userId)
+          if (userExists) {
+            return prevUsers.map(u =>
+              u.userId === userData.userId ? { ...u, connected: true } : u,
+            )
+          } else {
+            return [...prevUsers, { ...userData, connected: true }]
+          }
+        })
       })
 
-      newSocket.on('user:disconnect', userData => {
-        console.log('User disconnected:', userData)
+      newSocket.on('user:disconnected', userData => {
         setUsers(prevUsers =>
-          prevUsers.map(user =>
-            user.userId === userData.userId ? { ...user, connected: false } : user,
-          ),
+          prevUsers.map(u => (u.userId === userData.userId ? { ...u, connected: false } : u)),
         )
       })
 
+      newSocket.on('user:leave', userData => {
+        setUsers(prevUsers => prevUsers.filter(u => u.userId !== userData.userId))
+      })
+
       newSocket.on('user:reconnect', userData => {
-        console.log('User reconnected:', userData)
         setUsers(prevUsers =>
           prevUsers.map(user =>
             user.userId === userData.userId ? { ...user, connected: true } : user,
@@ -82,7 +101,6 @@ const App = () => {
   const handleLogin = username => {
     setUser({
       name: username,
-      avatar: `https://api.dicebear.com/6.x/avataaars/svg?seed=${username}`,
     })
   }
 
@@ -92,10 +110,11 @@ const App = () => {
     }
     setUser(null)
     setSocket(null)
-    setChannels([])
     setCurrentChannel(null)
     setUsers([])
+    setChannels([])
     setMessages([])
+    setIsConnected(false)
   }
 
   const handleLeaveServer = () => {
@@ -105,15 +124,15 @@ const App = () => {
     }
     setUser(null)
     setSocket(null)
-    setChannels([])
     setCurrentChannel(null)
     setUsers([])
+    setChannels([])
     setMessages([])
+    setIsConnected(false)
   }
 
   const handleSendMessage = content => {
     if (socket && currentChannel) {
-      console.log('Sending message:', currentChannel, content)
       socket.emit('message:channel:send', currentChannel, content)
     }
   }
@@ -139,12 +158,14 @@ const App = () => {
         onDisconnect={handleDisconnect}
         onLeaveServer={handleLeaveServer}
         currentUser={user}
+        isConnected={isConnected}
       />
       <ChatArea
         currentChannel={currentChannel}
         messages={messages.filter(m => m.channel === currentChannel)}
         onSendMessage={handleSendMessage}
         currentUser={user}
+        isConnected={isConnected}
       />
     </div>
   )

@@ -1,3 +1,6 @@
+import ChannelList from '../ChannelList/ChannelList'
+import UserList from '../UserList/UserList'
+import Avatar from '../Avatar/Avatar'
 import './Sidebar.css'
 
 const Sidebar = ({
@@ -8,47 +11,33 @@ const Sidebar = ({
   onDisconnect,
   onLeaveServer,
   currentUser,
+  isConnected,
 }) => {
   return (
     <div className="sidebar">
       <div className="sidebar-content">
-        <h2>Channels</h2>
-        <ul className="channel-list">
-          {channels.map(channel => (
-            <li
-              key={channel.name}
-              className={`channel-item ${currentChannel === channel.name ? 'active' : ''}`}
-              onClick={() => onChannelSelect(channel.name)}
-            >
-              # {channel.name}
-            </li>
-          ))}
-        </ul>
-        <h2>Users</h2>
-        <ul className="user-list">
-          {users.map(user => (
-            <li key={user.userId} className="user-item">
-              <div className={`user-status ${user.connected ? 'online' : 'offline'}`}></div>
-              {user.username}
-            </li>
-          ))}
-        </ul>
+        <ChannelList
+          channels={channels}
+          currentChannel={currentChannel}
+          onChannelSelect={onChannelSelect}
+          isConnected={isConnected}
+        />
+        <UserList users={users} />
       </div>
       {currentUser && (
         <div className="user-info">
           <div className="user-profile">
-            <img
-              src={`https://api.dicebear.com/6.x/avataaars/svg?seed=${currentUser.name}`}
-              alt={currentUser.name}
-              className="avatar"
-            />
+            <div className="avatar-container">
+              <Avatar username={currentUser.name} size="medium" />
+              <div className={`status-indicator ${isConnected ? 'online' : 'offline'}`}></div>
+            </div>
             <span className="username">{currentUser.name}</span>
           </div>
           <div className="user-actions">
-            <button onClick={onDisconnect} className="disconnect-button">
+            <button onClick={onDisconnect} className="disconnect-button" disabled={!isConnected}>
               Disconnect
             </button>
-            <button onClick={onLeaveServer} className="leave-button">
+            <button onClick={onLeaveServer} className="leave-button" disabled={!isConnected}>
               Leave Server
             </button>
           </div>

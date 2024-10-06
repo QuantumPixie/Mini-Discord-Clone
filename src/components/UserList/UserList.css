@@ -1,0 +1,62 @@
+.user-list-container {
+  padding: 0 16px;
+}
+
+.user-list-header {
+  font-size: 16px;
+  font-weight: 600;
+  color: #dcddde;
+  margin-bottom: 16px;
+}
+
+.user-section {
+  margin-bottom: 24px;
+}
+
+.user-section-title {
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 600;
+  color: #8e9297;
+  margin-bottom: 8px;
+}
+
+.user-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.user-item {
+  display: flex;
+  align-items: center;
+  padding: 6px 0;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.1s;
+}
+
+.user-item:hover {
+  background-color: rgb(79 84 92 / 16%);
+}
+
+.user-status {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.user-status.online {
+  background-color: #43b581;
+}
+
+.user-status.offline {
+  background-color: #747f8d;
+}
+
+.user-name {
+  margin-left: 8px;
+  font-size: 16px;
+  color: #dcddde;
+}

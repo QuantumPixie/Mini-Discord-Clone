@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
+import Avatar from '../Avatar/Avatar'
 import './ChatArea.css'
 
 const ChatArea = ({ currentChannel, messages, onSendMessage }) => {
@@ -26,13 +27,11 @@ const ChatArea = ({ currentChannel, messages, onSendMessage }) => {
         {messages.map((message, index) => (
           <div key={message.id || index} className="message">
             <div className="message-header">
-              <img
-                src={`https://api.dicebear.com/6.x/avataaars/svg?seed=${message.username}`}
-                alt={message.username}
-                className="avatar"
-              />
-              <span className="username">{message.username}</span>
-              <span className="timestamp">{new Date(message.timestamp).toLocaleString()}</span>
+              <Avatar username={message.username} size="medium" />
+              <div className="message-info">
+                <span className="username">{message.username}</span>
+                <span className="timestamp">{new Date(message.timestamp).toLocaleString()}</span>
+              </div>
             </div>
             <p className="message-content">{message.content}</p>
           </div>

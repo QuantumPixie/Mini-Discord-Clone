@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 module.exports = {
   initializeStore: () => {
     const sessionStorage = new Map()

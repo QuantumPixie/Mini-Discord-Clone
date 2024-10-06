@@ -1,0 +1,35 @@
+.avatar {
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.icon-container {
+  width: 70%;
+  height: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar svg {
+  width: 100%;
+  height: 100%;
+}
+
+.avatar-small {
+  width: 24px;
+  height: 24px;
+}
+
+.avatar-medium {
+  width: 40px;
+  height: 40px;
+}
+
+.avatar-large {
+  width: 64px;
+  height: 64px;
+}

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const { generateRandomId } = require('./utils.cjs')
 
 module.exports = {
