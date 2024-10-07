@@ -18,21 +18,33 @@ Real-time Communication: Socket.IO
 ## Setup and Installation
 
 **Clone the repository:**
-git clone https://github.com/QuantumPixie/Mini-Discord-Clone.git
+
+```git clone https://github.com/QuantumPixie/Mini-Discord-Clone.git
 cd mini-discord-clone-starter-kit git
+```
 
 **Install dependencies:**
-npm install
+
+```npm install
+
+```
 
 **Start the WebSocket server:**
-npm run server
+
+```npm run server
+
+```
 
 **In a separate terminal, start the React development server:**
-npm run dev
+
+```npm run dev
+
+```
 
 **Open your browser and navigate to http://localhost:5177 (or the port specified by Vite).**
 
-**WebSocket Events**
+## WebSocket Events
+
 The application supports various WebSocket events for real-time communication:
 
 connect: Emitted when a WebSocket connection is established
@@ -46,20 +58,22 @@ disconnect: Emitted when the WebSocket connection is closed
 
 For more details on event usage, refer to the server.cjs file.
 
-**Development**
+## Development
 
 The project uses Vite for fast development and building.
 ESLint and Prettier are configured for code linting and formatting.
 The @ alias is set up for importing from the src directory.
 
 **Useful Commands**
-
+```
 npm run dev: Start the development server
 npm run build: Build the production-ready application
 npm run lint: Run ESLint
 npm run format: Format code using Prettier
 npm run preview: Preview the production build locally
 npm run server: Start the WebSocket server
+```
 
 **Note on State Persistence**
+
 User list, sessions, and messages are stored in memory. Data is lost when the WebSocket server is restarted.
