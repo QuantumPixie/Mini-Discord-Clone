@@ -22,25 +22,31 @@ Real-time Communication: Socket.IO
 
 **Clone the repository:**
 
-```git clone https://github.com/QuantumPixie/Mini-Discord-Clone.git
+```
+git clone https://github.com/QuantumPixie/Mini-Discord-Clone.git
+```
+```
 cd mini-discord-clone-starter-kit git
 ```
 
 **Install dependencies:**
 
-```npm install
+```
+npm install
 
 ```
 
 **Start the WebSocket server:**
 
-```npm run server
+```
+npm run server
 
 ```
 
 **In a separate terminal, start the React development server:**
 
-```npm run dev
+```
+npm run dev
 
 ```
 
