@@ -26,15 +26,14 @@ const App = () => {
 
       newSocket.on('disconnect', () => {
         setIsConnected(false)
-        setUsers([]) // Clear users when disconnected
-        setChannels([]) // Clear channels when disconnected
-        setCurrentChannel(null) // Reset current channel
-        setMessages([]) // Clear messages when disconnected
+        setUsers([])
+        setChannels([]) 
+        setCurrentChannel(null)
+        setMessages([])
       })
 
       newSocket.on('connect_error', () => {
         setIsConnected(false)
-        // Optionally, you can try to reconnect here
       })
 
       newSocket.on('channels', serverChannels => {
