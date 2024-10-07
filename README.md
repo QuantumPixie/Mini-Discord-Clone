@@ -1,18 +1,21 @@
 ## Discord Mini Clone
 
-This project is a simplified clone of Discord, built using React and Socket.IO. It demonstrates real-time communication features in a chat application.
+This project is a simplified clone of Discord, built using React and Socket.IO.
+It demonstrates real-time communication features in a chat application.
 
 ## Features
 
-Real-time messaging using WebSockets
-Multiple channels support
-User presence (online/offline status)
-Session management
+- Real-time messaging using WebSockets
+- Multiple channels support
+- User presence (online/offline status)
+- Session management
 
 ## Tech Stack
 
 Frontend: React (with Vite as the build tool)
+
 Backend: Node.js with Express
+
 Real-time Communication: Socket.IO
 
 ## Setup and Installation
@@ -47,22 +50,22 @@ cd mini-discord-clone-starter-kit git
 
 The application supports various WebSocket events for real-time communication:
 
-connect: Emitted when a WebSocket connection is established
-session: Emitted when a session is initialized
-channels: Returns a list of channels with their messages
-message:channel: Emitted when a message is sent to a channel
-users: Returns a list of users (online and offline)
-user:join: Emitted when a new user joins the server
-user:disconnect: Emitted when a user disconnects
-disconnect: Emitted when the WebSocket connection is closed
+- connect: Emitted when a WebSocket connection is established
+- session: Emitted when a session is initialized
+- channels: Returns a list of channels with their messages
+- message:channel: Emitted when a message is sent to a channel
+- users: Returns a list of users (online and offline)
+- user:join: Emitted when a new user joins the server
+- user:disconnect: Emitted when a user disconnects
+- disconnect: Emitted when the WebSocket connection is closed
 
 For more details on event usage, refer to the server.cjs file.
 
 ## Development
 
-The project uses Vite for fast development and building.
-ESLint and Prettier are configured for code linting and formatting.
-The @ alias is set up for importing from the src directory.
+- The project uses Vite for fast development and building.
+- ESLint and Prettier are configured for code linting and formatting.
+- The @ alias is set up for importing from the src directory.
 
 **Useful Commands**
 ```
