@@ -1,57 +1,64 @@
-# How to use this starter kit
+## Discord Mini Clone
 
-The starter kit includes both the Vite + React setup as well as the WebSocket server tailored specifically for the Mini Discord Clone project.
+This project is a simplified clone of Discord, built using React and Socket.IO. It demonstrates real-time communication features in a chat application.
 
-## React application
+## Features
 
-The application contains WebSocket socket.io object via `src/libs/socket.js`, which is imported inside `App.jsx`. Use the socket object to handle the connection and events.
+Real-time messaging using WebSockets
+Multiple channels support
+User presence (online/offline status)
+Session management
 
-## WebSocket server
+## Tech Stack
 
-The WebSocket server uses [socket.io](https://socket.io). The main server file is located in the root directory, `server.cjs`. Additional supporting modules are placed inside the `server` folder.
+Frontend: React (with Vite as the build tool)
+Backend: Node.js with Express
+Real-time Communication: Socket.IO
 
-### Supported events
+## Setup and Installation
 
-* `connect` - emitted to the client when WebSocket connection is established with the server.
-* `session` - emitted when session is initialized after connecting to the server.
-* `channels` - returns list of channels along with contained messages in each channel.
-* `message:channel` - emitted to all clients in the `<channel>` when the user sends a message to that channel. The event is also emitted to the sender.
-* `users` - returns list of users (both online and offline).
-* `user:join` - emitted to all clients in the `welcome` channel when a new user joins the server.
-* `user:disconnect` - emitted to all clients when the user disconnects (WebSocket connection closed).
-* `disconnect` - emitted to the client when WebSocket connection is closed.
+**Clone the repository:**
+git clone https://github.com/QuantumPixie/Mini-Discord-Clone.git
+cd discord-mini-clone
 
-* `user:leave` - client should emit this event when user explicitly leaves the server.
-* `message:channel:send` - client should emit this event when user sends a message to a specific channel.
+**Install dependencies:**
+npm install
 
-Inspect the `server.cjs` to see what parameters and arguments are accompanied by each event.
-
-#### Leaving vs disconnecting
-
-In Discord, one can join and leave the server. When leaving, such a user is no longer present in the server user list.
-
-Disconnecting, however, means that the user is no longer currently online, but is still present in the server user list. Reconnecting to the server means the user becoming online again.
-
-### WebSocket server state
-
-User list, sessions and messages are stored in memory. When the WebSocket server is restarted, all data is lost.
-
-### Running the server
-
-After installing dependencies with `npm install`, use the following command to start the WebSocket server:
-
-```sh
+**Start the WebSocket server:**
 npm run server
-```
 
-Alternatively, you can invoke Node.js directly with the given server file:
-
-```sh
-node server.cjs
-```
-
-React + Vite dev server must be running separately:
-
-```sh
+**In a separate terminal, start the React development server:**
 npm run dev
-```
+
+**Open your browser and navigate to http://localhost:5177 (or the port specified by Vite).**
+
+**WebSocket Events**
+The application supports various WebSocket events for real-time communication:
+
+connect: Emitted when a WebSocket connection is established
+session: Emitted when a session is initialized
+channels: Returns a list of channels with their messages
+message:channel: Emitted when a message is sent to a channel
+users: Returns a list of users (online and offline)
+user:join: Emitted when a new user joins the server
+user:disconnect: Emitted when a user disconnects
+disconnect: Emitted when the WebSocket connection is closed
+
+For more details on event usage, refer to the server.cjs file.
+Development
+
+The project uses Vite for fast development and building.
+ESLint and Prettier are configured for code linting and formatting.
+The @ alias is set up for importing from the src directory.
+
+**Useful Commands**
+
+npm run dev: Start the development server
+npm run build: Build the production-ready application
+npm run lint: Run ESLint
+npm run format: Format code using Prettier
+npm run preview: Preview the production build locally
+npm run server: Start the WebSocket server
+
+**Note on State Persistence**
+User list, sessions, and messages are stored in memory. Data is lost when the WebSocket server is restarted.
