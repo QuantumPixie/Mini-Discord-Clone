@@ -19,7 +19,7 @@ Real-time Communication: Socket.IO
 
 **Clone the repository:**
 git clone https://github.com/QuantumPixie/Mini-Discord-Clone.git
-cd discord-mini-clone
+cd mini-discord-clone-starter-kit git
 
 **Install dependencies:**
 npm install
@@ -45,7 +45,8 @@ user:disconnect: Emitted when a user disconnects
 disconnect: Emitted when the WebSocket connection is closed
 
 For more details on event usage, refer to the server.cjs file.
-Development
+
+**Development**
 
 The project uses Vite for fast development and building.
 ESLint and Prettier are configured for code linting and formatting.
