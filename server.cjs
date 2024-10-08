@@ -72,21 +72,26 @@ io.on('connection', socket => {
     io.to(channel).emit('message:channel', channel, builtMessage)
   })
 
-  socket.on('user:leave', () => {
+  socket.on('user:leave', acknowledgement => {
     const session = sessions.getSessionById(socket.sessionId)
     if (session) {
-      io.emit('user:leave', session)
-      sessions.deleteSession(socket.sessionId)
-
-      // Remove user from all channels
       channels.forEach(channel => {
-        const index = channel.users.indexOf(session.userId)
-        if (index !== -1) {
-          channel.users.splice(index, 1)
+        if (channel.users && Array.isArray(channel.users)) {
+          const index = channel.users.indexOf(session.userId)
+          if (index !== -1) {
+            channel.users.splice(index, 1)
+          }
         }
       })
+
+      socket.broadcast.emit('user:leave', session)
+
+      sessions.deleteSession(socket.sessionId)
     }
-    socket.disconnect(true)
+
+    if (typeof acknowledgement === 'function') {
+      acknowledgement()
+    }
   })
 
   socket.on('disconnect', () => {

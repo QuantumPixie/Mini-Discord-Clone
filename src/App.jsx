@@ -27,7 +27,7 @@ const App = () => {
       newSocket.on('disconnect', () => {
         setIsConnected(false)
         setUsers([])
-        setChannels([]) 
+        setChannels([])
         setCurrentChannel(null)
         setMessages([])
       })
@@ -118,16 +118,17 @@ const App = () => {
 
   const handleLeaveServer = () => {
     if (socket) {
-      socket.emit('user:leave')
-      socket.disconnect()
+      socket.emit('user:leave', () => {
+        setUser(null)
+        setSocket(null)
+        setCurrentChannel(null)
+        setUsers([])
+        setChannels([])
+        setMessages([])
+        setIsConnected(false)
+        socket.disconnect()
+      })
     }
-    setUser(null)
-    setSocket(null)
-    setCurrentChannel(null)
-    setUsers([])
-    setChannels([])
-    setMessages([])
-    setIsConnected(false)
   }
 
   const handleSendMessage = content => {
