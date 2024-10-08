@@ -13,17 +13,17 @@
 
 .sidebar h2 {
   padding: 16px;
-  margin: 0 0 0 16px; /* Added left margin */
+  margin: 0 0 0 16px;
   font-size: 25px;
   text-transform: uppercase;
   color: #8e9297;
 }
 
-/* Styling for channel names */
+
 .channel-item {
-  padding: 8px 16px 8px 32px; /* Increased left padding */
-  font-weight: bold; /* Made channel names bold */
-  font-size: 16px; /* Increased font size */
+  padding: 8px 16px 8px 32px;
+  font-weight: bold;
+  font-size: 16px;
   cursor: pointer;
 }
 
@@ -76,12 +76,12 @@
 .user-actions {
   display: flex;
   justify-content: space-between;
-  gap: 10px; /* Added gap between buttons */
+  gap: 10px;
 }
 
 .disconnect-button,
 .leave-button {
-  flex: 1; /* Make buttons take equal width */
+  flex: 1;
   padding: 8px 16px;
   border: none;
   border-radius: 4px;
